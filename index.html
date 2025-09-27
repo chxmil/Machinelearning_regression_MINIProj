@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFPR Prediction Tool - Static Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <i class="fas fa-chart-line text-3xl text-primary mr-3"></i>
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">LFPR Prediction Tool</h1>
+                        <p class="text-gray-600">Labour Force Participation Rate Forecasting</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-gray-500">Powered by XGBoost</div>
+                    <div class="text-xs text-gray-400">R² = 0.8262 | MAE = 2.90</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Demo Notice -->
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+            <div class="flex items-start">
+                <i class="fas fa-info-circle text-2xl text-yellow-600 mr-4 mt-1"></i>
+                <div>
+                    <h2 class="text-xl font-semibold text-yellow-800 mb-2">Static Demo Version</h2>
+                    <p class="text-yellow-700 leading-relaxed mb-4">
+                        This is a static demonstration version of the LFPR Prediction Tool. 
+                        For the full interactive version with real predictions, please visit the deployed application.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" id="deploymentLink" class="bg-primary hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            View Live Application
+                        </a>
+                        <a href="https://github.com/yourusername/Machinelearning_regression_MINIProj" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200">
+                            <i class="fas fa-code mr-2"></i>
+                            View Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Card -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-start">
+                <i class="fas fa-info-circle text-2xl text-primary mr-4 mt-1"></i>
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">What is LFPR?</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        The Labour Force Participation Rate (LFPR) measures the share of the working-age population (15 years and older) 
+                        that is in the labour force (employed, unemployed, or seasonally unemployed). It is expressed as a percentage (0–100%).
+                    </p>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-blue-800">
+                            <strong>Example:</strong> If the model predicts 65%, it means 65% of the working-age population is participating in the labour market.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Performance -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <i class="fas fa-chart-bar text-success mr-3"></i>
+                Model Performance
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-r from-success to-green-400 rounded-lg p-6 text-white text-center">
+                    <div class="text-3xl font-bold">82.62%</div>
+                    <div class="text-green-100">R² Score</div>
+                    <div class="text-sm text-green-200 mt-2">Excellent fit</div>
+                </div>
+                <div class="bg-gradient-to-r from-warning to-yellow-400 rounded-lg p-6 text-white text-center">
+                    <div class="text-3xl font-bold">2.90</div>
+                    <div class="text-yellow-100">MAE</div>
+                    <div class="text-sm text-yellow-200 mt-2">Mean Absolute Error</div>
+                </div>
+                <div class="bg-gradient-to-r from-secondary to-blue-400 rounded-lg p-6 text-white text-center">
+                    <div class="text-3xl font-bold">6.20</div>
+                    <div class="text-blue-100">RMSE</div>
+                    <div class="text-sm text-blue-200 mt-2">Root Mean Square Error</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <i class="fas fa-cogs text-primary mr-3"></i>
+                Model Features
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Input Variables</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-calendar-alt text-primary mr-3"></i>
+                            <span>Year (2550-2580)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-graduation-cap text-primary mr-3"></i>
+                            <span>Education Level (13 categories)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                            <span>Area (รวม, เขตเทศบาล, นอกเขตเทศบาล)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-users text-primary mr-3"></i>
+                            <span>Gender (รวม, ชาย, หญิง)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-calendar text-primary mr-3"></i>
+                            <span>Quarter (1-4)</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Technical Details</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-brain text-primary mr-3"></i>
+                            <span>Algorithm: XGBoost Regressor</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-database text-primary mr-3"></i>
+                            <span>Training Data: 5,603 samples</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-chart-line text-primary mr-3"></i>
+                            <span>Features: 13 encoded variables</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-cog text-primary mr-3"></i>
+                            <span>Preprocessing: StandardScaler</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Prediction -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                <i class="fas fa-flask text-accent mr-3"></i>
+                Sample Prediction
+            </h2>
+            
+            <div class="bg-gradient-to-r from-success to-green-400 rounded-lg p-6 text-white mb-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold">Sample Prediction</h3>
+                        <p class="text-green-100">Year: 2567, Education: อุดมศึกษา สายวิชาการ, Area: รวม, Gender: รวม, Quarter: 1</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-4xl font-bold">68.45%</div>
+                        <div class="text-green-100">Predicted LFPR</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 rounded-lg p-6">
+                <h4 class="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <i class="fas fa-lightbulb text-accent mr-2"></i>
+                    Interpretation
+                </h4>
+                <p class="text-gray-700 leading-relaxed">
+                    The predicted Labour Force Participation Rate is 68.45%. This means 68.45% of the working-age population (15 years and older) 
+                    is participating in the labour market under the given conditions.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p class="text-gray-600">
+                    <i class="fas fa-database mr-2"></i>
+                    Data Source: Thailand Open Data (data.go.th) | National Statistical Office of Thailand
+                </p>
+                <p class="text-sm text-gray-500 mt-2">
+                    Model: XGBoost Regressor | Features: 13 encoded variables | Training Data: 5,603 samples
+                </p>
+                <div class="mt-4">
+                    <a href="https://github.com/yourusername/Machinelearning_regression_MINIProj" class="text-primary hover:text-secondary mr-4">
+                        <i class="fab fa-github mr-1"></i>GitHub Repository
+                    </a>
+                    <a href="#" id="deploymentLink2" class="text-primary hover:text-secondary">
+                        <i class="fas fa-external-link-alt mr-1"></i>Live Application
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update deployment links when available
+        document.addEventListener('DOMContentLoaded', function() {
+            const deploymentLinks = document.querySelectorAll('#deploymentLink, #deploymentLink2');
+            const deploymentUrl = 'https://your-app-name.herokuapp.com'; // Update this with your actual deployment URL
+            
+            deploymentLinks.forEach(link => {
+                link.href = deploymentUrl;
+            });
+        });
+    </script>
+</body>
+</html>
